@@ -84,7 +84,7 @@ async function testCacheOpening(log) {
   const cc = await self.caches.open(CACHE_NAME);
   const p2 = performance.now();
   log(`It took: ${p2 - p1} to open cache!`);
-}
+};
 
 (function () {
   var output = document.getElementById("output");
