@@ -78,6 +78,13 @@ async function testCacheStorage(log) {
   }
 };
 
+async function testCacheOpening(log) {
+  const p1 = performance.now();
+  const cc = await self.caches.open(CACHE_NAME);
+  const p2 = performance.now();
+  log(`It took: ${p2 - p1} to open cache!`);
+}
+
 (function () {
   var output = document.getElementById("output");
   var btn = document.getElementById("btn");
@@ -92,5 +99,6 @@ async function testCacheStorage(log) {
   btn.addEventListener("click", function () {
     log("Button clicked at " + new Date().toISOString());
     testCacheStorage(log);
+    testCacheOpening(log);
   });
 })();
