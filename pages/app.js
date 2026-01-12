@@ -1,5 +1,5 @@
+const CACHE_NAME = 'stress-test-cache';
 async function testCacheStorage(log) {
-  const CACHE_NAME = 'stress-test-cache';
   const TOTAL_FILES = 50000;
   const BATCH_SIZE = 100; // Process in batches to avoid overwhelming the browser
   const FILE_SIZE = 1024; // 1KB per file
