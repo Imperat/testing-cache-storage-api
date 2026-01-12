@@ -79,6 +79,7 @@ async function testCacheStorage(log) {
 };
 
 async function testCacheOpening(log) {
+  log('test cache opening...');
   const p1 = performance.now();
   const cc = await self.caches.open(CACHE_NAME);
   const p2 = performance.now();
