@@ -1,4 +1,7 @@
 const CACHE_NAME = 'stress-test-cache';
+
+let cache;
+
 async function testCacheStorage(log) {
   const TOTAL_FILES = 50000;
   const BATCH_SIZE = 1000; // Process in batches to avoid overwhelming the browser
@@ -14,7 +17,7 @@ async function testCacheStorage(log) {
   let errorCount = 0;
   
   try {
-    const cache = await caches.open(CACHE_NAME);
+    cache = await caches.open(CACHE_NAME);
     log('✓ Cache opened successfully\n');
     
     // Process files in batches
@@ -59,9 +62,6 @@ async function testCacheStorage(log) {
     log(`Errors: ${errorCount}`);
     log('='.repeat(60));
     
-    // Verify cache contents
-    const keys = await cache.keys();
-    log(`\n📊 Cache contains ${keys.length} entries`);
     
     // Storage estimate
     if (navigator.storage && navigator.storage.estimate) {
@@ -86,6 +86,14 @@ async function testCacheOpening(log) {
   log(`It took: ${p2 - p1} to open cache!`);
 };
 
+async function testCacheKeys(log) {
+  log('testing cache keys...');
+  const p1 = performance.now();
+  const keys = await cache.keys();
+  const p2 = performance.now();
+  log(`it took: ${p2 - p1} to test keys`);
+}
+
 (function () {
   var output = document.getElementById("output");
   var btn = document.getElementById("btn");
@@ -106,5 +114,10 @@ async function testCacheOpening(log) {
   btn2.addEventListener("click", function () {
     log("Button to open cache clicked");
     testCacheOpening(log);
+  });
+
+  btn3.addEventListener("click", function () {
+    log("Button to test cache.keys clicked");
+    testCacheKeys(log);
   });
 })();
