@@ -1,7 +1,7 @@
 const CACHE_NAME = 'stress-test-cache';
 async function testCacheStorage(log) {
   const TOTAL_FILES = 50000;
-  const BATCH_SIZE = 100; // Process in batches to avoid overwhelming the browser
+  const BATCH_SIZE = 1000; // Process in batches to avoid overwhelming the browser
   const FILE_SIZE = 1024; // 1KB per file
   
   log(`🚀 Starting Cache Storage stress test with ${TOTAL_FILES} files`);
@@ -89,6 +89,7 @@ async function testCacheOpening(log) {
 (function () {
   var output = document.getElementById("output");
   var btn = document.getElementById("btn");
+  var btn2 = document.getElementById("btn2");
 
   function log(msg) {
     output.textContent += msg + "\n";
@@ -100,6 +101,10 @@ async function testCacheOpening(log) {
   btn.addEventListener("click", function () {
     log("Button clicked at " + new Date().toISOString());
     testCacheStorage(log);
+  });
+
+  btn2.addEventListener("click", function () {
+    log("Button to open cache clicked");
     testCacheOpening(log);
   });
 })();
